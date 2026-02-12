@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Interview Analyzer</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f4f8;
+    text-align: center;
+    padding: 20px;
+}
+video {
+    border: 2px solid #333;
+    border-radius: 10px;
+    width: 360px;
+    height: 270px;
+    margin-bottom: 20px;
+}
+button#startBtn {
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background: #007bff;
+    color: white;
+    margin-bottom: 20px;
+}
+.metric {
+    margin: 10px 0;
+    font-size: 18px;
+}
+.coaching {
+    color: #1e3a8a;
+    font-size: 16px;
+    margin-top: 10px;
+    min-height: 40px;
+}
+</style>
+</head>
+<body>
+
+<h1>Live Interview Analyzer</h1>
+
+<video id="video" autoplay muted playsinline></video>
+<br>
+<button id="startBtn">Start Analysis</button>
+
+<div class="metric">Blinks: <span id="blinks">0</span></div>
+<div class="metric">Eye Contact: <span id="eyecontact">0%</span></div>
+<div class="metric">Filler Words: <span id="fillers">0</span></div>
+<div class="metric">Voice Energy: <span id="energy">0</span></div>
+<div class="metric">Nervousness: <span id="nervous">Low</span></div>
+<div class="metric">Confidence: <span id="confidence">0</span></div>
+
+<div class="metric"><b>Live Coaching:</b></div>
+<div id="coaching" class="coaching">Waiting to start...</div>
+
+<!-- MediaPipe Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+
+<script src="script.js"></script>
+</body>
+</html>
