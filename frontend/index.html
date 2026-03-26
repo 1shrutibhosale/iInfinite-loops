@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+    <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap)" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Study Buddy</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <button class="nav-item active" data-section="chat">
+                    <i class="fas fa-comments"></i>
+                    <span>Ask Questions</span>
+                </button>
+                <button class="nav-item" data-section="concepts">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Concepts</span>
+                </button>
+                <button class="nav-item" data-section="notes">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Notes</span>
+                </button>
+                <button class="nav-item" data-section="quiz">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Quiz</span>
+                </button>
+            </nav>
+
+            <div class="subject-selector">
+                <label>Current Subject:</label>
+                <select id="subjectSelect">
+                    <option value="">All Subjects</option>
+                    <option value="dataStructures">Data Structures</option>
+                    <option value="operatingSystems">Operating Systems</option>
+                    <option value="dbms">DBMS</option>
+                    <option value="computerNetworks">Computer Networks</option>
+                </select>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span id="connectionStatus">Connecting...</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Chat Section -->
+            <section id="chat-section" class="content-section active">
+                <div class="section-header">
+                    <h1><i class="fas fa-robot"></i> Ask Me Anything</h1>
+                    <p>Get instant answers to your academic questions</p>
+                </div>
+
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot">
+                            <div class="message-avatar">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>Hi! I'm your Study Buddy AI. Ask me anything about Data Structures, Operating Systems, DBMS, Computer Networks, or any other topic you're studying!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container">
+                        <div class="quick-prompts">
+                            <button class="quick-prompt" data-prompt="Explain binary search trees">Binary Search Trees</button>
+                            <button class="quick-prompt" data-prompt="What is deadlock in OS?">Deadlock</button>
+                            <button class="quick-prompt" data-prompt="Explain ACID properties">ACID Properties</button>
+                            <button class="quick-prompt" data-prompt="What is TCP vs UDP?">TCP vs UDP</button>
+                        </div>
+                        <div class="chat-input">
+                            <textarea id="questionInput" placeholder="Type your question here..." rows="1"></textarea>
+                            <button id="sendBtn" class="send-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Concepts Section -->
+            <section id="concepts-section" class="content-section">
+                <div class="section-header">
+                    <h1><i class="fas fa-lightbulb"></i> Learn Concepts</h1>
+                    <p>Simple explanations for complex topics</p>
+                </div>
+
+                <div class="concepts-container">
+                    <div class="concept-search">
+                        <input type="text" id="conceptSearch" placeholder="Search for a concept...">
+                        <select id="difficultySelect">
+                            <option value="simple">Simple</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                        <button id="explainBtn" class="primary-btn">
+                            <i class="fas fa-magic"></i> Explain
+                        </button>
+                    </div>
+
+                    <div class="concept-topics">
+                        <h3>Popular Topics</h3>
+                        <div class="topic-grid" id="topicGrid">
+                            <!-- Topics will be loaded dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="concept-display" id="conceptDisplay">
+                        <div class="placeholder-message">
+                            <i class="fas fa-book-open"></i>
+                            <p>Select a topic or search for a concept to get started</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notes Section -->
+            <section id="notes-section" class="content-section">
+                <div class="section-header">
+                    <h1><i class="fas fa-sticky-note"></i> Generate Notes</h1>
+                    <p>Create study notes, summaries, and flashcards</p>
+                </div>
+
+                <div class="notes-container">
+                    <div class="notes-form">
+                        <input type="text" id="noteTopic" placeholder="Enter topic for notes...">
+                        <div class="format-selector">
+                            <button class="format-btn active" data-format="notes">
+                                <i class="fas fa-file-alt"></i> Notes
+                            </button>
+                            <button class="format-btn" data-format="summary">
+                                <i class="fas fa-compress-alt"></i> Summary
+                            </button>
+                            <button class="format-btn" data-format="flashcards">
+                                <i class="fas fa-clone"></i> Flashcards
+                            </button>
+                        </div>
+                        <button id="generateNotesBtn" class="primary-btn">
+                            <i class="fas fa-magic"></i> Generate
+                        </button>
+                    </div>
+
+                    <div class="notes-display" id="notesDisplay">
+                        <div class="placeholder-message">
+                            <i class="fas fa-pencil-alt"></i>
+                            <p>Enter a topic and select a format to generate study materials</p>
+                        </div>
+                    </div>
+
+                    <div class="notes-actions" id="notesActions" style="display: none;">
+                        <button id="copyNotesBtn" class="action-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button id="downloadNotesBtn" class="action-btn">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quiz Section -->
+            <section id="quiz-section" class="content-section">
+                <div class="section-header">
+                    <h1><i class="fas fa-question-circle"></i> Quiz Yourself</h1>
+                    <p>Test your knowledge with interactive quizzes</p>
+                </div>
+
+                <div class="quiz-container">
+                    <!-- Quiz Setup -->
+                    <div class="quiz-setup" id="quizSetup">
+                        <div class="quiz-options">
+                            <div class="option-group">
+                                <label>Topic (optional):</label>
+                                <input type="text" id="quizTopic" placeholder="e.g., Binary Trees, Deadlocks">
+                            </div>
+                            <div class="option-group">
+                                <label>Number of Questions:</label>
+                                <select id="quizCount">
+                                    <option value="5">5 Questions</option>
+                                    <option value="10">10 Questions</option>
+                                    <option value="15">15 Questions</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label>Difficulty:</label>
+                                <select id="quizDifficulty">
+                                    <option value="easy">Easy</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="hard">Hard</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button id="startQuizBtn" class="primary-btn large">
+                            <i class="fas fa-play"></i> Start Quiz
+                        </button>
+                    </div>
+
+                    <!-- Quiz In Progress -->
+                    <div class="quiz-active" id="quizActive" style="display: none;">
+                        <div class="quiz-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span id="progressText">Question 1 of 5</span>
+                        </div>
+
+                        <div class="question-card" id="questionCard">
+                            <!-- Question will be loaded here -->
+                        </div>
+
+                        <div class="quiz-navigation">
+                            <button id="prevQuestionBtn" class="nav-btn" disabled>
+                                <i class="fas fa-chevron-left"></i> Previous
+                            </button>
+                            <button id="nextQuestionBtn" class="nav-btn">
+                                Next <i class="fas fa-chevron-right"></i>
+                            </button>
+                            <button id="submitQuizBtn" class="primary-btn" style="display: none;">
+                                <i class="fas fa-check"></i> Submit Quiz
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Results -->
+                    <div class="quiz-results" id="quizResults" style="display: none;">
+                        <div class="results-summary" id="resultsSummary">
+                            <!-- Results will be loaded here -->
+                        </div>
+                        <div class="results-details" id="resultsDetails">
+                            <!-- Detailed results will be loaded here -->
+                        </div>
+                        <button id="retakeQuizBtn" class="primary-btn">
+                            <i class="fas fa-redo"></i> Take Another Quiz
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader">
+            <div class="loader-spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
